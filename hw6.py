@@ -2,14 +2,57 @@ import re
 import unittest
 
 def sumNums(fileName):
-    pass
+
+    file = open(fileName)
+    lines = file.readlines()
+    file.close()
+
+    sum = 0
+
+    for line in lines:
+        line.rstrip()
+
+        l= re.findall('[0-9]+', line)
+
+        for k in l:
+            sum += int(k)
+
+    return sum
+
 
 def countWord(fileName, word):
-    pass
+
+    file = open(fileName)
+    lines = file.readlines()
+    file.close()
+
+    count = 0
+
+    for line in lines:
+        l = re.findall(word + '\\b', line, re.IGNORECASE)
+
+        count += len(l)
+
+    return count
+
+
 
 def listURLs(fileName):
-    pass
 
+    file = open(fileName)
+    lines = file.readlines()
+    file.close()
+
+    lst = []
+    for line in lines:
+        line.rstrip()
+
+        l = re.findall('www.[a-z A-z 0-9 ]+.[a-z A-Z]{3}\S*', line)
+
+        for i in l:
+            lst.append(i)
+
+    return lst
 
 class TestHW6(unittest.TestCase):
     """ Class to test this homework """
@@ -32,3 +75,4 @@ class TestHW6(unittest.TestCase):
 
 # run the tests
 unittest.main(verbosity=2)
+
